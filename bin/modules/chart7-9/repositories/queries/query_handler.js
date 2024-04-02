@@ -16,9 +16,14 @@ const getTreemapChart = async () => {
   return chart.getTreemapChart();
 };
 
+const getHeatmapWithModel = async () => {
+  return chart.getHeatmapWithModel();
+};
+
 module.exports = {
   getHeatmap,
   getTreemapChart,
   getScatterChart,
+  getHeatmapWithModel,
 };
 

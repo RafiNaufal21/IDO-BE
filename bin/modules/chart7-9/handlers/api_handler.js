@@ -19,9 +19,14 @@ const getTreemapChart = async (req, res) => {
   return sendResponse(result, res);
 };
 
+const getHeatmapWithModel = async (req, res) => {
+  const result = await queryHandler.getHeatmapWithModel();
+  return sendResponse(result, res);
+};
 module.exports = {
   getHeatmap,
   getScatterChart,
   getTreemapChart,
+  getHeatmapWithModel,
 };
 

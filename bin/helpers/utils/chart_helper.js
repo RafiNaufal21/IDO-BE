@@ -88,17 +88,55 @@ const transfromNormalTable = (data, title, tooltip) => {
   };
   return response;
 };
-const transdormHeatmapWithModel = (data, model, title, tooltip) => {
+const transformHeatmap = (data, title, tooltip, label) => {
+  const transformedData = {
+    tooltip: tooltip,
+    title: title,
+    series: data.map((monthData, name) => ({
+      nama: name,
+      data: monthData,
+    })),
+    ranges: [
+      {
+        from: -30,
+        to: 5,
+        name: 'low',
+      },
+      {
+        from: 6,
+        to: 20,
+        name: 'medium',
+      },
+      {
+        from: 21,
+        to: 45,
+        name: 'high',
+      },
+      {
+        from: 46,
+        to: 55,
+        name: 'extreme',
+      },
+    ],
+  };
+  return transformedData;
+};
+const transformHeatmapWithModel = (data, model, title, tooltip) => {
   const findDayIndex = (dayName, model) => {
-    return model.findIndex((day) => day.name === dayName);
+    const index = model.findIndex((day) => day.name === dayName);
+    return index !== -1 ? index : null;
   };
   const findHourIndex = (hourName, model) => {
     return model.findIndex((hour) => hour.x === hourName);
   };
   data.map((data) => {
     const findDay = findDayIndex(data.weekday, model);
-    const findHour = findHourIndex(data.hour, model[findDay].data);
-    model[findDay].data[findHour].y = data.avg_eksalasi;
+    if (findDay !== null) {
+      const findHour = findHourIndex(data.hour, model[findDay].data);
+      if (findHour !== -1) {
+        model[findDay].data[findHour].y = data.avg_eksalasi;
+      }
+    }
     return true;
   });
   const response = {
@@ -108,7 +146,6 @@ const transdormHeatmapWithModel = (data, model, title, tooltip) => {
   };
   return response;
 };
-
 const transformStepper = (data, title, tooltip) => {
   const formattedData = Object.keys(data).map((key) => ({
     icon: data[key],
@@ -146,7 +183,8 @@ module.exports = {
   transformPieChart,
   transformBarChart,
   transfromNormalTable,
-  transdormHeatmapWithModel,
+  transformHeatmapWithModel,
+  transformHeatmap,
   transformStepper,
   transformScatterChart,
 };

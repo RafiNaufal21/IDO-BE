@@ -1,4 +1,4 @@
-const collectionName = 'scatter';
+const collectionName = 'heatmap';
 const { ObjectId } = require('mongodb');
 
 class Query {
