@@ -121,6 +121,18 @@ const transformHeatmap = (data, title, tooltip, label) => {
   };
   return transformedData;
 };
+const transformTreemap = (data, title, tooltip, label) => {
+  const transformedData = {
+    tooltip: tooltip,
+    title: title,
+    series: data.map((monthData, name) => ({
+      nama: name,
+      data: monthData,
+    })),
+  };
+  return transformedData;
+};
+
 const transformHeatmapWithModel = (data, model, title, tooltip) => {
   const findDayIndex = (dayName, model) => {
     const index = model.findIndex((day) => day.name === dayName);
@@ -187,5 +199,6 @@ module.exports = {
   transformHeatmap,
   transformStepper,
   transformScatterChart,
+  transformTreemap,
 };
 

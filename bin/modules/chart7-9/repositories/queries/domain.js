@@ -9,6 +9,7 @@ const {
   transformScatterChart,
   transformHeatmapWithModel,
   transformHeatmap,
+  transformTreemap,
 } = require('../../../../helpers/utils/chart_helper');
 
 class Chart {
@@ -82,7 +83,7 @@ class Chart {
     const title = 'Daily Total Ticket Mudik use Treemap Chart';
     const tooltip = 'Daily Total Ticket Mudik';
 
-    return wrapper.data(transformHeatmap(response.data, title, tooltip));
+    return wrapper.data(transformTreemap(response.data, title, tooltip));
   }
 }
 module.exports = Chart;

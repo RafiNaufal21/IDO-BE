@@ -1,4 +1,3 @@
-
 const bcrypt = require('bcrypt');
 const config = require('../../infra/configs/global_config');
 const saltRounds = parseInt(config.get('/crypto/saltRounds'), 10);
@@ -11,3 +10,4 @@ module.exports = {
   generateHash,
   compareHash,
 };
+
